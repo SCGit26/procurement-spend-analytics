@@ -1,0 +1,4 @@
+"department","vendor_name","category","is_preferred_vendor","invoice_id","invoice_amount","match_status","payment_status","receipt_lag_days","total_cycle_days"
+"Engineering","CloudScale IT Solutions","IT Software",True,"INV-5001",15000.00,"3-Way Match Passed","Paid",2,17
+"Operations","OfficeDepot Direct","Office Supplies",True,"INV-5002",1200.00,"3-Way Match Passed","Paid",1,20
+"Engineering","Shadow SaaS Inc","IT Software",False,"INV-5003",4500.00,"Maverick Spend","Paid",1,21

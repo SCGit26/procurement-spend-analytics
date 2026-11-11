@@ -1,0 +1,19 @@
+-- 1. Insert Mock Vendors
+INSERT INTO vendors (vendor_id, vendor_name, category, tax_id, is_preferred_vendor, country) VALUES
+('V001', 'CloudScale IT Solutions', 'IT Software', '12-3456789', TRUE, 'USA'),
+('V002', 'OfficeDepot Direct', 'Office Supplies', '98-7654321', TRUE, 'USA'),
+('V003', 'Apex Logistics Corp', 'Logistics', '45-6789012', TRUE, 'USA'),
+('V004', 'Shadow SaaS Inc', 'IT Software', '99-8877665', FALSE, 'USA'); -- Maverick/Off-contract vendor
+
+-- 2. Insert Mock Purchase Orders
+INSERT INTO purchase_orders (po_id, vendor_id, order_date, total_po_amount, department, po_status) VALUES
+('PO10001', 'V001', '2026-10-01', 15000.00, 'Engineering', 'CLOSED'),
+('PO10002', 'V002', '2026-10-05', 1200.00, 'Operations', 'CLOSED'),
+('PO10003', 'V003', '2026-10-10', 8500.00, 'Supply Chain', 'OPEN'),
+('PO10004', 'V004', '2026-10-12', 4500.00, 'Engineering', 'CLOSED'); -- Unapproved vendor PO
+
+-- 3. Insert Mock Invoices & Payments
+INSERT INTO invoices_payments (invoice_id, po_id, vendor_id, invoice_date, goods_receipt_date, payment_date, invoice_amount, match_status, payment_status) VALUES
+('INV-5001', 'PO10001', 'V001', '2026-10-03', '2026-10-05', '2026-10-20', 15000.00, '3-Way Match Passed', 'Paid'),
+('INV-5002', 'PO10002', 'V002', '2026-10-08', '2026-10-09', '2026-10-28', 1200.00, '3-Way Match Passed', 'Paid'),
+('INV-5003', 'PO10004', 'V004', '2026-10-15', '2026-10-16', '2026-11-05', 4500.00, 'Maverick Spend', 'Paid');
