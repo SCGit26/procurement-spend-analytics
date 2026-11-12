@@ -18,18 +18,13 @@ Unmanaged ("maverick") spend bypassing negotiated contract rates represents a ma
 
 ### Key Performance Indicators (KPIs)
 
-* **Total Spend (\$):** Aggregate invoice value processed across all business units ($\sum \text{invoice\_amount}$).
+* **Total Spend (\$):** Aggregate invoice value processed across all business units.
 
-* **Preferred Vendor Rate (%):** Percentage of total spend executed through contracted vendors:
-  
-
-  $$
-  \text{Preferred Vendor Rate \%} = \frac{\sum (\text{CASE WHEN } \text{is\_preferred\_vendor} = \text{'true'} \text{ THEN } \text{invoice\_amount ELSE } 0 \text{ END})}{\sum (\text{invoice\_amount})}
-  $$
+* **Preferred Vendor Rate (%):** Percentage of total spend executed through contracted vendors.
 
 * **Maverick Spend (\$):** Total financial value of off-contract/unapproved invoices.
 
-* **Avg Cycle Time (Days):** Mean operational duration from purchase requisition to invoice settlement ($\text{AVG}(\text{total\_cycle\_days})$).
+* **Avg Cycle Time (Days):** Average operational duration from purchase requisition to invoice settlement.
 
 ## 📐 System & Dashboard Architecture
 
@@ -69,21 +64,26 @@ To prevent data-type casting mismatches during Looker Studio aggregations (such 
 ```
 -- Verification of Preferred vs. Maverick Spend Allocation
 SELECT 
-    LOWER(is_preferred_vendor) AS preferred_status,
-    COUNT(invoice_id) AS invoice_count,
-    SUM(invoice_amount) AS total_spend_usd,
-    ROUND(SUM(invoice_amount) * 100.0 / SUM(SUM(invoice_amount)) OVER (), 2) AS spend_percentage
-FROM ptp_analytics_portfolio
-GROUP BY 1
+    v.is_preferred_vendor AS preferred_status,
+    COUNT(DISTINCT ip.invoice_id) AS invoice_count,
+    SUM(ip.invoice_amount) AS total_spend_usd,
+    ROUND(
+        SUM(ip.invoice_amount) * 100.0 / SUM(SUM(ip.invoice_amount)) OVER (), 
+        2
+    ) AS spend_percentage
+FROM ptp.vendors v
+JOIN ptp.purchase_orders po
+    ON v.vendor_id = po.vendor_id
+JOIN ptp.invoices_payments ip
+    ON po.po_id = ip.po_id 
+GROUP BY v.is_preferred_vendor
 ORDER BY total_spend_usd DESC;
 
 ```
 
 ## 📊 Dashboard Visual Mockup
 
-> ![alt text](Procurement_&_PTP_Spend_Analytics_Dashboard.png)
->
-> `![Final Looker Studio Dashboard](./dashboard/Procurement_&_PTP_Spend_Analytics_Dashboard.png)`
+* **Final Looker Studio Dashboard:** `/dashboard/Procurement_&_PTP_Spend_Analytics_Dashboard.png`
 
 ## 💻 Tech Stack & Tools Used
 
