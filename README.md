@@ -99,7 +99,7 @@ ORDER BY total_spend_usd DESC;
 
 1. **Database Setup:** Run the SQL scripts in `/sql/schema.sql` to create the table schema and load raw PTP transactional data from `/data/mock_procurement_data.csv`.
 
-2. **Data Connector:** Connect Looker Studio to the PostgreSQL database or import the sanitized CSV from `/data/ptp_analytics_facts.csv`.
+2. **Data Connector:** Connect Looker Studio to the PostgreSQL database or import the CSV from `/data/ptp_analytics_data.csv`.
 
 3. **Type Mapping:** Ensure `invoice_amount` is mapped to **Numeric** $\rightarrow$ **Currency (USD)** and `is_preferred_vendor` is set to **Text**.
 
