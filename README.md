@@ -1,12 +1,12 @@
 # Enterprise Procurement Analytics & Spend Compliance Dashboard
 
-## 📌 Executive Summary
+## Executive Summary
 
 This project delivers an end-to-end Procurement Analytics solution designed to provide executive visibility into organizational spending, preferred vendor compliance, and off-contract maverick spend leakage.
 
 By ingesting raw transactional Procure-to-Pay (PTP) data into PostgreSQL, standardizing field-level schemas, and developing a dynamic 12-column executive dashboard in Looker Studio, this project enables procurement leadership to identify compliance gaps, optimize vendor relationships, and mitigate capital leakage.
 
-## 🎯 Business Problem & Key Metrics
+## Business Problem & Key Metrics
 
 Unmanaged ("maverick") spend bypassing negotiated contract rates represents a major source of capital inefficiency in enterprise procurement. This dashboard addresses three core operational questions:
 
@@ -26,7 +26,7 @@ Unmanaged ("maverick") spend bypassing negotiated contract rates represents a ma
 
 * **Avg Cycle Time (Days):** Average operational duration from purchase requisition to invoice settlement.
 
-## 📐 System & Dashboard Architecture
+## System & Dashboard Architecture
 
 Before constructing the dashboard in Looker Studio, a formal 12-column wireframe was engineered in Lucidchart to ensure strict visual hierarchy, optimal cognitive ergonomics, and grid alignment for executive presentation.
 
@@ -44,7 +44,7 @@ Before constructing the dashboard in Looker Studio, a formal 12-column wireframe
 
 * **Tier 3 (Granular Vendor Exposure Table):** One full-width 12-column detail grid (**Panel C: Off-Contract Vendor Exposure & Leakage Summary**) detailing vendor-level exposure (`vendor_name`, `category`, `department`, `invoice_amount`).
 
-## 🛠️ Data Pipeline & Schema Setup
+## Data Pipeline & Schema Setup
 
 ### 1. Schema Configuration & Type Handling
 
@@ -81,11 +81,11 @@ ORDER BY total_spend_usd DESC;
 
 ```
 
-## 📊 Dashboard Visual Mockup
+## Dashboard Visual Mockup
 
 * **Final Looker Studio Dashboard:** `/dashboard/Procurement_&_PTP_Spend_Analytics_Dashboard.png`
 
-## 💻 Tech Stack & Tools Used
+## Tech Stack & Tools Used
 
 * **Database Engine:** PostgreSQL
 
@@ -95,7 +95,7 @@ ORDER BY total_spend_usd DESC;
 
 * **Documentation & Version Control:** Git, Markdown, GitHub
 
-## 🚀 How to Replicate This Project
+## How to Replicate This Project
 
 1. **Database Setup:** Run the SQL scripts in `/sql/schema.sql` to create the table schema and load raw PTP transactional data from `/data/mock_procurement_data.csv`.
 
